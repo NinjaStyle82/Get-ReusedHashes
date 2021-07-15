@@ -65,6 +65,6 @@ function Get-ReusedHashes {
         }
     }
 
-    $Hashes | Select-Object Count,Name | Out-String
+    $hashes | %{[PSCustomObject]@{'Count'=$_.Count;'Hash'=$_.Name;'Usernames'=$($_.Group | select username |%{$_.Username}|Out-String)}} | ft -Wrap
     $UsernameHT | Out-String
 }
